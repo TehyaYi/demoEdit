@@ -1,4 +1,18 @@
-# CELL_FoodDis
+# CELL_Food Distribution System
+
+## Functions
+
+### Food Distribution
+
+#### Input
+* species
+* poplation
+* dominance rating
+
+#### Output
+* food for indivdual in each species
+
+## Notes
 
 INPUTS:
 Species, population, dominance rating
