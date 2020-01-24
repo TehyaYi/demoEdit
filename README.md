@@ -8,22 +8,22 @@ script holder in each level.
 This system will get all the food sources and animal popluations in a level by its tag. For each food source it will try to feed
 all populations that eat that food.
 
-* Note: this can be a optimization problem since animal only eats certain type of foods. Approach: sort
+* Note: this can be a optimization problem since animal only eats certain type of foods. Approach: 
 * Note: we want to make sure that the system's behavior is easy for player to observes changes.
 
 ## Detail
 
-### Input
-* List<AnimalController>
+### Formulas:
+* Population dominance = species dominance • population size
+* Group food = (population dominance / total dominance) • food source production
+* Individual food = group food / population size
 
 
-### Output
-* food for indivdual in each species
-
-### How to get vars need:
+### How to get vars need: 
 * dominance rating - store in Animal class, total dominance can be get by `PopulationDominance` in `AnimalPopluatoion.cs`
+* food sources - call `FoodSourceTileMapScript.getFoodSources()`.
 
-### Function structure
+### System structure
 
 ```C#
 class FoodDistributionSystem
