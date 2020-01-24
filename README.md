@@ -1,16 +1,40 @@
 # CELL_Food Distribution System
 
-## Functions
+## Overall
+This script discribes a system to distribute all food sources to all animal populations in a single level. It is meant to be attech to a
+script holder in each level.
 
-### Food Distribution
+## How it works
+This system will get all the food sources and animal popluations in a level by its tag. For each food source it will try to feed
+all populations that eat that food.
 
-#### Input
-* species
-* poplation
-* dominance rating
+* Note: this can be a optimization problem since animal only eats certain type of foods. Approach: sort
+* Note: we want to make sure that the system's behavior is easy for player to observes changes.
 
-#### Output
+## Detail
+
+### Input
+* List<AnimalController>
+
+
+### Output
 * food for indivdual in each species
+
+### How to get vars need:
+* dominance rating - store in Animal class, total dominance can be get by `PopulationDominance` in `AnimalPopluatoion.cs`
+
+### Function structure
+class FoodDistributionSystem
+{
+    func getAllAnimalPoplulation();
+    func getAllFoodSource();
+
+    update()
+    {
+
+    }
+}
+
 
 ## Notes
 
