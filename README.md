@@ -24,6 +24,8 @@ all populations that eat that food.
 * dominance rating - store in Animal class, total dominance can be get by `PopulationDominance` in `AnimalPopluatoion.cs`
 
 ### Function structure
+
+```C#
 class FoodDistributionSystem
 {
     func getAllAnimalPoplulation();
@@ -37,6 +39,7 @@ class FoodDistributionSystem
         distributFood();
     }
 }
+```
 
 
 ## Notes
