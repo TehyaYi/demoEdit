@@ -28,10 +28,13 @@ class FoodDistributionSystem
 {
     func getAllAnimalPoplulation();
     func getAllFoodSource();
+    func distributFood();
 
     update()
     {
-
+        getAllAnimalPoplulation();
+        getAllFoodSource();
+        distributFood();
     }
 }
 
