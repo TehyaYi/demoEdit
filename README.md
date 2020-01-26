@@ -11,6 +11,13 @@ all populations that eat that food.
 * Note: this can be a optimization problem since animal only eats certain type of foods. Approach: 
 * Note: we want to make sure that the system's behavior is easy for player to observes changes.
 
+## Objective(s)
+* clean up existing `FoodDistributionScript.cs` and create new `FoodDistributionSystem.cs`
+* break functionality into different functions
+* create update() which updates the need (still keep `UpdateFoodNeeds`)
+* try to reduce time complexity
+* verify current algo use optimal distribution (which assumsion that animal will not get full)
+
 ## Detail
 
 ### Formulas:

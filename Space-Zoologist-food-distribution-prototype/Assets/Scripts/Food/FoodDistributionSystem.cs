@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FoodDistributionSyst : MonoBehaviour
+public class FoodDistributionSystem : MonoBehaviour
 {
-
+    // This gives access to all the food sources on map
     [SerializeField] private FoodSourceTileMapScript foodSourceTileMapScript;
     private List<FoodSource> foodSources;
 
+    // This gives access to all animal popluations
+    private AnimalController animalController;
+
     void getAllFoodSource()
     {
-        // Get the list of food sources in the reserves
+        // Get the list of food sources on the map
         foodSources = foodSourceTileMapScript.getFoodSources();
     }
 
