@@ -46,7 +46,7 @@ public class FoodDistributionSystem : MonoBehaviour
             // Iterate over all the existing animal populations and see if the food source is edible to any of them and
             // add them to animalsThatCanConsumeFoodSource list and also count up the total amount of dominance that will
             // be competing for the food source.
-            foreach (AnimalPopulation animalPopulation in animalController.GetAnimalPopulations())
+            foreach (AnimalPopulation animalPopulation in this.animalPopulations)
             {
                 if (animalPopulation.IsEdible(foodSource))
                 {
@@ -77,5 +77,6 @@ public class FoodDistributionSystem : MonoBehaviour
     {
         getAllFoodSource();
         getAllAnimalPoplulation();
+        UpdateFoodNeeds();
     }
 }

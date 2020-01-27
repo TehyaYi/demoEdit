@@ -58,7 +58,7 @@ public class GrowthDeclineScript : MonoBehaviour
         {
             _populations.Remove(animalPopulation);
         }
-        _foodDistributionScript.UpdateFoodNeeds();
+        //_foodDistributionScript.UpdateFoodNeeds();
         foreach (AnimalPopulation animalPopulation in _populations)
         {
             int numBad = GetNumOfCondition(animalPopulation.Needs, NeedCondition.Bad);

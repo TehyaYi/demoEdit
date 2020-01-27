@@ -37,13 +37,13 @@ class FoodDistributionSystem
 {
     func getAllAnimalPoplulation();
     func getAllFoodSource();
-    func distributFood();
+    func UpdateFoodNeeds();
 
     update()
     {
         getAllAnimalPoplulation();
         getAllFoodSource();
-        distributFood();
+        UpdateFoodNeeds();
     }
 }
 ```
