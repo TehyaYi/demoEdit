@@ -6,36 +6,30 @@ public class FoodDistributionSystem : MonoBehaviour
 {
     // This gives access to all the food sources on map
     [SerializeField] private FoodSourceTileMapScript foodSourceTileMapScript;
-    private List<FoodSource> foodSources;
     // This gives access to all animal popluations
     private AnimalController animalController;
+    private List<FoodSource> foodSources;
     private List<AnimalPopulation> animalPopulations = new List<AnimalPopulation>();
 
-    void getAllFoodSource()
+    private void getAllFoodSource()
     {
         this.foodSources = foodSourceTileMapScript.getFoodSources();
     }
 
-    void getAllAnimalPoplulation()
+    private void getAllAnimalPoplulation()
     {
         this.animalPopulations = animalController.GetAnimalPopulations();
     }
 
-    void UpdateFoodNeeds()
-    {
-        // Reset food needs values
-        foreach (FoodSource foodSource in foodSources)
-        {
-            foreach (AnimalPopulation animalPopulation in animalController.GetAnimalPopulations())
-            {
-                Need<float> foodSourceNeed = (Need<float>)animalPopulation.GetNeed(foodSource.Type);
-                if (foodSourceNeed != null)
-                {
-                    foodSourceNeed.CurrentValue = 0f;
-                }
-            }
-        }
 
+    /*
+     * Notes: this implementation is has bad time complexity and not a optimal solution.
+     * Goal: lower time complexity.
+     */
+    // Calculate and update food distrubution based on given formula
+    private void UpdateFoodNeeds()
+    {
+        // Distribute by food source
         foreach (FoodSource foodSource in foodSources)
         {
             int totalDominance = 0;
@@ -50,10 +44,19 @@ public class FoodDistributionSystem : MonoBehaviour
             {
                 if (animalPopulation.IsEdible(foodSource))
                 {
+                    // Add poplulation dominace to total dominance
                     totalDominance += animalPopulation.PopulationDominance();
                     animalsThatCanConsumeFoodSource.Add(animalPopulation);
+
+                    // Reset food source need value
+                    Need<float> foodSourceNeed = (Need<float>)animalPopulation.GetNeed(foodSource.Type);
+                    if (foodSourceNeed != null)
+                    {
+                        foodSourceNeed.CurrentValue = 0f;
+                    }
                 }
             }
+
             // Calculate the FoodPerIndividual score for each animal population.
             foreach (AnimalPopulation animalPopulation in animalsThatCanConsumeFoodSource)
             {
@@ -66,17 +69,25 @@ public class FoodDistributionSystem : MonoBehaviour
         }
     }
 
+    // For other system to call 
+    public void manualUpdate()
+    {
+        this.getAllFoodSource();
+        this.getAllAnimalPoplulation();
+        this.UpdateFoodNeeds();
+    }
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         this.animalController = GetComponent<AnimalController>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        getAllFoodSource();
-        getAllAnimalPoplulation();
-        UpdateFoodNeeds();
+        this.getAllFoodSource();
+        this.getAllAnimalPoplulation();
+        this.UpdateFoodNeeds();
     }
 }
