@@ -50,10 +50,7 @@ public class FoodDistributionSystem : MonoBehaviour
 
                     // Reset food source need value
                     Need<float> foodSourceNeed = (Need<float>)animalPopulation.GetNeed(foodSource.Type);
-                    if (foodSourceNeed != null)
-                    {
-                        foodSourceNeed.CurrentValue = 0f;
-                    }
+                    foodSourceNeed.CurrentValue = 0f;
                 }
             }
 
