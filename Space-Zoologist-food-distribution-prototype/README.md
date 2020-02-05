@@ -1,2 +1,0 @@
-# Space-Zoologist
-CELL Project

@@ -1,13 +1,23 @@
 # CELL_Food Distribution System
 
 ## Overall
-This script discribes a system to distribute all food sources to all animal populations in a single level. It is meant to be attech to a
-script holder in each level.
+This script discribes a system to distribute all food sources to all animal populations in a single level. It is meant to be attech to a script holder in each level.
 
 ## How it works
-This system will get all the food sources and animal popluations in a level by its tag. For each food source it will try to feed
-all populations that eat that food.
+This distrubution function `UpdateFoodNeeds` will be given an food source type and do that following:
 
+* Realistic method
+    1. Locate all food sources with the given type, `foodSources`.
+    2. For each food source, `foodSource`, get all the animal that has access to it, `animalPopulations`.
+    3. For all the animal populations, `animalPopulations`, remove the populations that does not consume `foodSource`, to get a new list `animalsPopulationsThatCanConsumeFoodSource`.
+    4. Compute the competition rating for each `foodSource`.
+    5. Sort the food sources from `foodSource` based on the competition rating in increading order.
+    6. Distribute each food source from `foodSources` starting with food source with low competition rating to high.
+
+* Naive method
+    Step 1,2,3 is the same as realistic method. Jump to step 6 and distribute in any order.
+
+### Notes: 
 * Note: this can be a optimization problem since animal only eats certain type of foods. Approach: 
 * Note: we want to make sure that the system's behavior is easy for player to observes changes.
 
@@ -30,7 +40,7 @@ all populations that eat that food.
 * dominance rating - store in Animal class, total dominance can be get by `PopulationDominance` in `AnimalPopluatoion.cs`
 * food sources - call `FoodSourceTileMapScript.getFoodSources()`.
 
-### System structure
+### Pseudocode
 
 ```C#
 class FoodDistributionSystem
