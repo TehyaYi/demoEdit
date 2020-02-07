@@ -38,11 +38,24 @@ class FoodDistributionSystem
     func getAllFoodSource();
     func UpdateFoodNeeds();
 
-    update()
+    void getFoodSourceByType()
+    List<AnimalPopulation> getPopulationsCanAccess(FoodSource);
+    Bool animalCanConsume(AnimalPopulation, FoodSource.type);
+    
+
+    void updateFoodType(FoodSource.type)
     {
-        getAllAnimalPoplulation();
-        getAllFoodSource();
-        UpdateFoodNeeds();
+        List<FoodSource> foodSources = getFoodSourceByType();
+
+        forEach(fs in foodSources)
+        {
+            List<AnimalPopulation> animalPopulations = getPopulationsCanAccess(fs);
+
+            forEach(ap in animalPopulations)
+            {
+                if()
+            }
+        }
     }
 }
 ```
