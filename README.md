@@ -32,6 +32,9 @@ This distrubution function `UpdateFoodNeeds` will be given an food source type a
 ### Pseudocode
 
 ```C#
+
+
+
 class FoodDistributionSystem
 {
     func getAllAnimalPoplulation();
@@ -41,20 +44,28 @@ class FoodDistributionSystem
     void getFoodSourceByType()
     List<AnimalPopulation> getPopulationsCanAccess(FoodSource);
     Bool animalCanConsume(AnimalPopulation, FoodSource.type);
+    List<AnimalPopulation> getPopulationIsEdible(List<AnimalPopulation>, FoodSource);
+    float getCompetionRating(List<AnimalPopulation>);
+    void distributeFoodSource(FoodSource)
     
-
     void updateFoodType(FoodSource.type)
     {
         List<FoodSource> foodSources = getFoodSourceByType();
 
+        SortedList ratingAndPopulationPair = new SortedList();
+
         forEach(fs in foodSources)
         {
             List<AnimalPopulation> animalPopulations = getPopulationsCanAccess(fs);
+            List<AnimalPopulation> populationsThatCanConsumeFoodSource(animalPopulations, fs);
+            float competionRating = getCompetionRating(populationsThatCanConsumeFoodSource);
 
-            forEach(ap in animalPopulations)
-            {
-                if()
-            }
+            ratingAndPopulationPair.Add(competionRating, fs);
+        }
+
+        foreach(DictionaryEntry pair in ratingAndPopulationPair)
+        {
+            distributeFoodSource(pair.Value);
         }
     }
 }
