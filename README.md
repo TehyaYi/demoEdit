@@ -33,8 +33,6 @@ This distrubution function `UpdateFoodNeeds` will be given an food source type a
 
 ```C#
 
-
-
 class FoodDistributionSystem
 {
     func getAllAnimalPoplulation();
