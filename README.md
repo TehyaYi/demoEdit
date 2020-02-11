@@ -25,27 +25,28 @@ This distrubution function `UpdateFoodNeeds` will be given an food source type a
 * Individual food = group food / population size
 
 
-### How to get vars need: 
-* dominance rating - store in Animal class, total dominance can be get by `PopulationDominance` in `AnimalPopluatoion.cs`
-* food sources - call `FoodSourceTileMapScript.getFoodSources()`.
-
 ### Pseudocode
 
 ```C#
 
 class FoodDistributionSystem
 {
-    func getAllAnimalPoplulation();
-    func getAllFoodSource();
-    func UpdateFoodNeeds();
-
-    void getFoodSourceByType()
+    // Plot/reserve system 
+    List<FoodSource> getFoodSourceByType()
     List<AnimalPopulation> getPopulationsCanAccess(FoodSource);
-    Bool animalCanConsume(AnimalPopulation, FoodSource.type);
-    List<AnimalPopulation> getPopulationIsEdible(List<AnimalPopulation>, FoodSource);
+
+    // AnimalPopulation class
+    List<AnimalPopulation> getPopulationsThatConsumeFoodSource(List<AnimalPopulation>, NeedType)
+    float getPoplulationDomiance(AnimalPopulation);
+    float getPopulationTotalDominace(AnimalPopulation);
+    float getPopulationSize(AnimalPopulation);
+
+    // NeedType
+    float getFoodSourceOutput(FoodSource);
+
+    void distributeFoodSource(FoodSource);
     float getCompetionRating(List<AnimalPopulation>);
-    void distributeFoodSource(FoodSource)
-    
+
     void updateFoodType(FoodSource.type)
     {
         List<FoodSource> foodSources = getFoodSourceByType();
