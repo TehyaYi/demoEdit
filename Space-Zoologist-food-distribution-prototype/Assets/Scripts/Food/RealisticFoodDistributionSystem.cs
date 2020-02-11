@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System;
 using UnityEngine;
 
 
@@ -50,37 +52,95 @@ public class RealisticFoodDistributionSystem : MonoBehaviour
     private float getCompetionRating(List<AnimalPopulation> populations)
     {
         float competitionRating = 0;
+        List<float> populationDominaces = new List<float>();
 
-        // TODO: compute competition rating(standard dev) of the donimance rating for the populations
+        
+        // Get all dominaces in a list
+        foreach(AnimalPopulation population in populations)
+        {
+            populationDominaces.Add(getPoplulationDomiance(population));
+        }
+
+
+        // Compute competition rating(standard deviviation)
+        float avg = populationDominaces.Average();
+        competitionRating = (float)Math.Sqrt(populationDominaces.Average(v => Math.Pow(v - avg, 2)));
+
 
         return competitionRating;
     }
 
-    private void distributeFoodSource(FoodSource foodSource)
+    private float getPoplulationDomiance(AnimalPopulation population)
     {
-        // TODO: distribute food source (same as naive method)
+        float domiance = 0f;
+
+        // TODO: get dominace rating for given population
+
+        return domiance;
     }
 
+    private float getPopulationTotalDominace(AnimalPopulation population)
+    {
+        float totalDomiance = 0f;
+
+        // TODO: get dominace rating for given population
+
+        return totalDomiance;
+    }
+
+    private float getFoodSourceOutput(FoodSource foodSource)
+    {
+        float output = 0f;
+
+        // TODO: get food source output
+
+        return output;
+    }
+
+    private float getPopulationSize(AnimalPopulation population)
+    {
+        float populationSize = 0f;
+
+        // TODO: get animal population size
+
+        return populationSize;
+    }
+
+
+    private void distributeFoodSource(FoodSource foodSource, List<AnimalPopulation> populations)
+    {
+        
+        foreach(AnimalPopulation population in populations)
+        {
+            float populationFood = getPoplulationDomiance(population) / getPopulationTotalDominace(population) * getFoodSourceOutput(foodSource);
+            float foodPerIndividual = populationFood / getPopulationSize(population);
+
+            // TODO: update food source need with foodPerIndividual
+        }
+    }
 
     // This function will be envoked when a food source is marked "dirty"
     public void updateFoodType(NeedType foodSourceType)
     {
         List<FoodSource> foodSources = getFoodSourceByType(foodSourceType);
 
-        SortedList ratingAndPopulationPair = new SortedList();
+        var ratingAndPopulationPair = new SortedList();
+        var foodSourceAndCanCosumePopulation = new Dictionary<FoodSource, List<AnimalPopulation>>();
 
-        foreach(FoodSource foodSource in foodSources)
+        foreach (FoodSource foodSource in foodSources)
         {
             List<AnimalPopulation> animalPopulations = getPopulationsCanAccess(foodSource);
             List<AnimalPopulation> populationsThatCanConsumeFoodSource = getPopulationsThatConsumeFoodSource(animalPopulations, foodSource.Type);
-            float competionRating = getCompetionRating(populationsThatCanConsumeFoodSource);
 
+            foodSourceAndCanCosumePopulation.Add(foodSource, populationsThatCanConsumeFoodSource);
+             
+            float competionRating = getCompetionRating(populationsThatCanConsumeFoodSource);
             ratingAndPopulationPair.Add(competionRating, foodSource);
         }
 
         foreach (DictionaryEntry pair in ratingAndPopulationPair)
         {
-            distributeFoodSource((FoodSource)pair.Value);
+            distributeFoodSource((FoodSource)pair.Value, foodSourceAndCanCosumePopulation[(FoodSource)pair.Value]);
         }
     }
 }
