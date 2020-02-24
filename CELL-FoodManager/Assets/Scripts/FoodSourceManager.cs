@@ -26,10 +26,12 @@ public class FoodSourceManager : MonoBehaviour
         return currIndex;
     }
     
-    public void delete(int currIndex)
+    public void delete(int index)
     {
-        foodSourceDict.Remove(currIndex);
+        foodSourceDict.Remove(index);
+
         // TODO : tell food dist and food env to update
+        foodDis.updateFoodType(this.foodSourceDict[index].getFoodType());
     }
 
     // Start is called before the first frame update

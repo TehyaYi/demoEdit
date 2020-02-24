@@ -16,6 +16,9 @@ using UnityEngine;
 
 public class RealisticFoodDistributionSystem : MonoBehaviour
 {
+
+    private float getFoodSourceOutput(FoodSource foodSource) { return foodSource.getOutput(); }
+
     // Get all the food source on map with the type given
     private List<FoodSource> getFoodSourceByType(string foodSourceType)
     {
@@ -43,7 +46,7 @@ public class RealisticFoodDistributionSystem : MonoBehaviour
 
         foreach(AnimalPopulation population in allPopulations)
         {
-            // TODO: check in population can consume foodSourceType
+            // TODO: check in population can consume foodSourceType. (AnimalPopulation)
             if (population.IsEdible(foodSource))
             {
                 canConsumePopulations.Add(population);
@@ -65,11 +68,9 @@ public class RealisticFoodDistributionSystem : MonoBehaviour
             populationDominaces.Add(getPoplulationDomiance(population));
         }
 
-
         // Compute competition rating(standard deviviation)
         float avg = populationDominaces.Average();
         competitionRating = (float)Math.Sqrt(populationDominaces.Average(v => Math.Pow(v - avg, 2)));
-
 
         return competitionRating;
     }
@@ -78,7 +79,7 @@ public class RealisticFoodDistributionSystem : MonoBehaviour
     {
         float domiance = 0f;
 
-        // TODO: get dominace rating for given population
+        // TODO: get dominace rating for given population. (AnimalPopulation)
 
         return domiance;
     }
@@ -87,25 +88,16 @@ public class RealisticFoodDistributionSystem : MonoBehaviour
     {
         float totalDomiance = 0f;
 
-        // TODO: get dominace rating for given population
+        // TODO: get dominace rating for given population. (AnimalPopulation)
 
         return totalDomiance;
-    }
-
-    private float getFoodSourceOutput(FoodSource foodSource)
-    {
-        float output = 0f;
-
-        // TODO: get food source output
-
-        return output;
     }
 
     private float getPopulationSize(AnimalPopulation population)
     {
         float populationSize = 0f;
 
-        // TODO: get animal population size
+        // TODO: get animal population size. (AnimalPopulation)
 
         return populationSize;
     }
