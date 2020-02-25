@@ -28,6 +28,7 @@ public class FoodSource : MonoBehaviour
         return totalOutput;
     }
 
+    // This returns the "string" name if the food type enum
     public string getFoodType() { return Enum.GetName(typeof(FoodTypes), type); }
 
     // Start is called before the first frame update
