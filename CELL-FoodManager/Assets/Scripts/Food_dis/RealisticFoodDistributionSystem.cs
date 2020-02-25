@@ -21,18 +21,8 @@ public class RealisticFoodDistributionSystem : MonoBehaviour
 {
 
     private float getFoodSourceOutput(FoodSource foodSource) { return foodSource.getOutput(); }
-    private float getPopulationDominace(AnimalPopulation population) { return population.PopulationDominance(); }
-    private int getPopulationSize(AnimalPopulation population) { return population.getPopulationSize(); }
-
-    // Get all the food source on map with the type given
-    private List<FoodSource> getFoodSourceByType(string foodSourceType)
-    {
-        List<FoodSource> foodSources = new List<FoodSource>();
-
-        // TODO: get all the food source on map by its type, `foodSourceType`. (Food soure manager)
-
-        return foodSources;
-    }
+    private float getPopulationDominace(AnimalPopulation population) { return population.PopulationDominace; }
+    private int getPopulationSize(AnimalPopulation population) { return population.PopulationSize; }
 
     // Get a list of animal population that has access to given food source
     private List<AnimalPopulation> getPopulationsCanAccess(FoodSource foodSource)
