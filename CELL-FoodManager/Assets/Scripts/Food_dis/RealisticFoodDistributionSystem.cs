@@ -11,20 +11,25 @@ using UnityEngine;
  */
 
 /*
- * Note: the food source type is an enum (int).
+ * Note:
+ *  - the food source type is an enum (int).
+ *  - need to add error handling.
+ *  - TPS test with all access.
  */
 
 public class RealisticFoodDistributionSystem : MonoBehaviour
 {
 
     private float getFoodSourceOutput(FoodSource foodSource) { return foodSource.getOutput(); }
+    private float getPopulationDominace(AnimalPopulation population) { return population.PopulationDominance(); }
+    private int getPopulationSize(AnimalPopulation population) { return population.getPopulationSize(); }
 
     // Get all the food source on map with the type given
     private List<FoodSource> getFoodSourceByType(string foodSourceType)
     {
         List<FoodSource> foodSources = new List<FoodSource>();
 
-        // TODO: get all the food source on map by its type, `foodSourceType`. (TPS)
+        // TODO: get all the food source on map by its type, `foodSourceType`. (Food soure manager)
 
         return foodSources;
     }
@@ -34,10 +39,23 @@ public class RealisticFoodDistributionSystem : MonoBehaviour
     {
         List<AnimalPopulation> populationsCanAccess = new List<AnimalPopulation>();
 
-        // TODO: get list of animal population that has access to foodSource. (TPS)
+        // TODO: get list of animal population that has access to foodSource. (RPS)
 
         return populationsCanAccess;
     }
+
+    private float getTotoalDominaceOfPopulations(List<AnimalPopulation> populations)
+    {
+        float totalDominace = 0f;
+
+        foreach(AnimalPopulation population in populations)
+        {
+            totalDominace += getPopulationDominace(population);
+        }
+
+        return totalDominace;
+    }
+   
 
     // Get list of populations that can consume given food source in given list of population
     private List<AnimalPopulation> getPopulationsThatConsumeFoodSource(List<AnimalPopulation> allPopulations, FoodSource foodSource)
@@ -65,7 +83,7 @@ public class RealisticFoodDistributionSystem : MonoBehaviour
         // Get all dominaces in a list
         foreach(AnimalPopulation population in populations)
         {
-            populationDominaces.Add(getPoplulationDomiance(population));
+            populationDominaces.Add(getPopulationDominace(population));
         }
 
         // Compute competition rating(standard deviviation)
@@ -75,58 +93,38 @@ public class RealisticFoodDistributionSystem : MonoBehaviour
         return competitionRating;
     }
 
-    private float getPoplulationDomiance(AnimalPopulation population)
-    {
-        float domiance = 0f;
-
-        // TODO: get dominace rating for given population. (AnimalPopulation)
-
-        return domiance;
-    }
-
-    private float getPopulationTotalDominace(AnimalPopulation population)
-    {
-        float totalDomiance = 0f;
-
-        // TODO: get dominace rating for given population. (AnimalPopulation)
-
-        return totalDomiance;
-    }
-
-    private float getPopulationSize(AnimalPopulation population)
-    {
-        float populationSize = 0f;
-
-        // TODO: get animal population size. (AnimalPopulation)
-
-        return populationSize;
-    }
-
-
+    
+    
     private void distributeFoodSource(FoodSource foodSource, List<AnimalPopulation> populations)
     {
-        
+        float totalDominace = getTotoalDominaceOfPopulations(populations);
+
+
         foreach(AnimalPopulation population in populations)
         {
-            float populationFood = getPoplulationDomiance(population) / getPopulationTotalDominace(population) * getFoodSourceOutput(foodSource);
+            float populationFood = getPopulationDominace(population) / totalDominace * getFoodSourceOutput(foodSource);
             float foodPerIndividual = populationFood / getPopulationSize(population);
 
             // TODO: update food source need with foodPerIndividual
+            //var ListOfNeeds = population.GetNeeds();
+
+            //foreach(Need need in ListOfNeeds)
+            //{
+            //    if()
+            //}
         }
     }
 
-    // This function will be envoked when a food source is marked "dirty"
-    public void updateFoodType(string foodSourceType)
+    // This function will be envoked when a type of food source is marked "dirty"
+    public void update(List<FoodSource> foodSources)
     {
-        List<FoodSource> foodSources = getFoodSourceByType(foodSourceType);
-
         var ratingAndPopulationPair = new SortedList();
         var foodSourceAndCanCosumePopulation = new Dictionary<FoodSource, List<AnimalPopulation>>();
 
         foreach (FoodSource foodSource in foodSources)
         {
             List<AnimalPopulation> animalPopulations = getPopulationsCanAccess(foodSource);
-            List<AnimalPopulation> populationsThatCanConsumeFoodSource = getPopulationsThatConsumeFoodSource(animalPopulations, foodSource.getFoodType());
+            List<AnimalPopulation> populationsThatCanConsumeFoodSource = getPopulationsThatConsumeFoodSource(animalPopulations, foodSource);
 
             foodSourceAndCanCosumePopulation.Add(foodSource, populationsThatCanConsumeFoodSource);
              
