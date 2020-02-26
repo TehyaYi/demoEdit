@@ -6,17 +6,18 @@ using UnityEngine;
 // Animal populations are holders of animals that also contain information about the animals.
 abstract public class AnimalPopulation
 {
-    private float _animalDominance { get; }
+    private float animalDominance { get; }
 
-    private int _populationSize { get; }
+    private int populationSize { get; }
     public int PopulationSize { get; }
 
-    private float _populationDominace;
-    public float PopulationDominace { get => _animalDominance * _populationSize; }
+    private float populationDominace;
+    public float PopulationDominace { get => animalDominance * populationSize; }
 
     public float GrowthTimer;
 
-    protected AnimalPopulation() { }
+    private List<Need> need;
+
 
     /// <summary>
     /// Adds a new animal to the list of animals.
@@ -31,7 +32,7 @@ abstract public class AnimalPopulation
 
     public bool IsEdible(FoodSource foodSource)
     {
-        foreach (Need need in Needs)
+        foreach (Need need in needs)
         {
             if (need.getFoodType() == foodSource.getFoodType())
             {
