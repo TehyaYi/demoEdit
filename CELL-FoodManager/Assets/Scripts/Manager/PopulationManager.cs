@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/FoodManagerScriptableObject", order = 1)]
-
-public class FoodManagerScriptableObject : MonoBehaviour
+public class PopulationManager : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

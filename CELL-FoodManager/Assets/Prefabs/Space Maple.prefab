@@ -92,9 +92,10 @@ GameObject:
   m_Component:
   - component: {fileID: 357624510369086741}
   - component: {fileID: 357624510369086738}
+  - component: {fileID: 479130228}
   m_Layer: 0
   m_Name: Space Maple
-  m_TagString: Untagged
+  m_TagString: foodSource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,3 +131,22 @@ MonoBehaviour:
   foodValues: {fileID: 11400000, guid: 4e4c6641b26a5457c9349021ee2101cf, type: 2}
   rawValues: []
   conditions: 
+  totalOutput: 0
+  gameManager: {fileID: 0}
+  tileRetriever: {fileID: 0}
+--- !u!114 &479130228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357624510369086739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d73dee3f8d4d44f22b11793983883b0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  info: {fileID: 357624510369086738}
+  toTest: {fileID: 0}
+  from: {fileID: 0}
+  text: {fileID: 0}
