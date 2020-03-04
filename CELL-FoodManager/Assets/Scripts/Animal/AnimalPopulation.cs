@@ -16,7 +16,7 @@ abstract public class AnimalPopulation
 
     public float GrowthTimer;
 
-    private List<Need> need;
+  
 
 
     /// <summary>
