@@ -10,7 +10,7 @@ public class FoodSourceManager : MonoBehaviour
     //list of all active food source instances
     private IList<FoodSource> foodSourceList = new List<FoodSource>();
 
-    private RealisticFoodDistributionSystem distributionSystem;
+    private RealisticFoodDistributionSystem distributionSystem = new RealisticFoodDistributionSystem();
 
     public GameObject[] foodSources;
 
@@ -21,7 +21,7 @@ public class FoodSourceManager : MonoBehaviour
     
     public void delete(FoodSource oldFoodSource)
     {
-        foodSourceDict.Remove(oldFoodSource);
+        foodSourceList.Remove(oldFoodSource);
         // TODO : tell food dist and food env to update
     }
 
@@ -40,14 +40,14 @@ public class FoodSourceManager : MonoBehaviour
 
         foreach(GameObject foodSource in this.foodSources)
         {
-            if (!foodSourceList.Contains(foodSource))
+            if (!foodSourceList.Contains(foodSource.GetComponent<FoodSource>()))
             {
-                this.add(foodSource);
+                this.add(foodSource.GetComponent<FoodSource>());
             }
-            toUpdate.Add(foodSource.GetComponent<FoodSource>());
 
+            toUpdate.Add(foodSource.GetComponent<FoodSource>());
         }
 
-        //distributionSystem.update(toUpdate);
+        distributionSystem.update(toUpdate);
     }
 }

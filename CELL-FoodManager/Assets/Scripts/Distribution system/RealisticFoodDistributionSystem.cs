@@ -125,6 +125,9 @@ public class RealisticFoodDistributionSystem
         {
             distributeFoodSource((FoodSource)pair.Value, foodSourceAndCanCosumePopulation[(FoodSource)pair.Value]);
         }
+
+        //TODO : take this out when done testing
+        System.Console.WriteLine("I'm Distributing");
     }
     /*
     // This function will be envoked when a type of food source is marked "dirty"
