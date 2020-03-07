@@ -126,7 +126,7 @@ public class RealisticFoodDistributionSystem
             distributeFoodSource((FoodSource)pair.Value, foodSourceAndCanCosumePopulation[(FoodSource)pair.Value]);
         }
     }
-
+    /*
     // This function will be envoked when a type of food source is marked "dirty"
     public void testerUpdate(List<FoodSource> foodSources, List<Population> populations)
     {
@@ -148,7 +148,7 @@ public class RealisticFoodDistributionSystem
         {
             distributeFoodSource((FoodSource)pair.Value, foodSourceAndCanCosumePopulation[(FoodSource)pair.Value]);
         }
-    }
+    }*/
 }
 
 public class DuplicateKeyComparer<TKey> : IComparer<TKey> where TKey : IComparable

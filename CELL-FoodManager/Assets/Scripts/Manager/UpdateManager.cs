@@ -36,6 +36,6 @@ public class UpdateManager : MonoBehaviour
             populaionToUpdate.Add(population.GetComponent<Population>());
         }
 
-        this.distributionSystem.testerUpdate(foodSourceToUpdate, populaionToUpdate);
+        //this.distributionSystem.testerUpdate(foodSourceToUpdate, populaionToUpdate);
     }
 }
