@@ -7,6 +7,8 @@ public class FoodSourceManager : MonoBehaviour
     //Food source manager will be keeping references to the food sources and telling the food dis. sys 
     //and environmental interactions sys. to update when they need to
 
+    List<FoodSource> toUpdate = new List<FoodSource>();
+
     //list of all active food source instances
     private IList<FoodSource> foodSourceList = new List<FoodSource>();
 
@@ -29,6 +31,24 @@ public class FoodSourceManager : MonoBehaviour
     void Start()
     {
         this.foodSources = GameObject.FindGameObjectsWithTag("foodSource");
+       
+
+        foreach (GameObject foodSource in this.foodSources)
+        {
+
+            if (!foodSourceList.Contains((FoodSource)foodSource.GetComponent("Food Source")))
+            {
+                this.add((FoodSource)foodSource.GetComponent("Food Source"));
+            }
+
+            toUpdate.Add((FoodSource)foodSource.GetComponent("Food Source"));
+            print("hello");
+        }
+        print(toUpdate.Count);
+        if (toUpdate.Count > 0)
+        {
+            distributionSystem.update(toUpdate);
+        }
     }
 
     // Update is called once per frame
@@ -36,18 +56,6 @@ public class FoodSourceManager : MonoBehaviour
     {
         this.foodSources = GameObject.FindGameObjectsWithTag("foodSource");
 
-        List<FoodSource> toUpdate = new List<FoodSource>();
-
-        foreach(GameObject foodSource in this.foodSources)
-        {
-            if (!foodSourceList.Contains(foodSource.GetComponent<FoodSource>()))
-            {
-                this.add(foodSource.GetComponent<FoodSource>());
-            }
-
-            toUpdate.Add(foodSource.GetComponent<FoodSource>());
-        }
-
-        distributionSystem.update(toUpdate);
+        
     }
 }

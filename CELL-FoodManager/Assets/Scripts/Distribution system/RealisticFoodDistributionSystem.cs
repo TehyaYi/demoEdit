@@ -103,7 +103,7 @@ public class RealisticFoodDistributionSystem
             population.updateNeed(foodSource.getType(), foodPerIndividual);
         }
     }
-
+    /*
     // This function will be envoked when a type of food source is marked "dirty"
     public void update(List<FoodSource> foodSources)
     {
@@ -129,6 +129,7 @@ public class RealisticFoodDistributionSystem
         //TODO : take this out when done testing
         System.Console.WriteLine("I'm Distributing");
     }
+    */
     /*
     // This function will be envoked when a type of food source is marked "dirty"
     public void testerUpdate(List<FoodSource> foodSources, List<Population> populations)
