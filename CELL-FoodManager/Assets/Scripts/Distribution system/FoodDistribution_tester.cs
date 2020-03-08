@@ -11,15 +11,18 @@ using UnityEngine;
 public class FoodDistribution_tester : FoodSourceManager
 {
     
- 
+ private float totalFood;
     //public void distributeFood()
     void Start()
     {
+        totalFood = 0;
         print("distribution system");
         foreach(GameObject food in foodSources)
         {
             print("hi");
+            totalFood += getFoodSourceOutput(food);
         }
+        print(totalFood);
     }
 
 /*
@@ -40,11 +43,10 @@ public class FoodDistribution_tester : FoodSourceManager
         return foodSources;
     }
 
-    private float getFoodSourceOutput(FoodSource foodSource)
+    private float getFoodSourceOutput(GameObject foodSource)
     {
-        float output = 0f;
-        // TODO: get food source output
-        return output;
+        FoodSource source = foodSource.GetComponent<FoodSource>();
+        return source.totalOutput;
     }
     
 

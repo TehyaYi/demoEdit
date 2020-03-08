@@ -37,7 +37,8 @@ public class FoodSourceManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       /* this.foodSources = GameObject.FindGameObjectsWithTag("foodSource");
+        /*
+       this.foodSources = GameObject.FindGameObjectsWithTag("foodSource");
 
         List<FoodSource> toUpdate = new List<FoodSource>();
 
@@ -51,6 +52,7 @@ public class FoodSourceManager : MonoBehaviour
             toUpdate.Add(foodSource.GetComponent<FoodSource>());
         }
 
-        distributionSystem.update(toUpdate);*/
+*/
+        //distributionSystem.update(toUpdate);
     }
 }

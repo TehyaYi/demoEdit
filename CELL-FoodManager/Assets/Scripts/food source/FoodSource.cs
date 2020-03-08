@@ -19,7 +19,7 @@ public class FoodSource : MonoBehaviour
     //How well each need is provided
     [SerializeField] private int[] conditions;
 
-    [SerializeField] private float totalOutput;
+    [SerializeField] public float totalOutput;
 
     public GameManager gameManager;
 
