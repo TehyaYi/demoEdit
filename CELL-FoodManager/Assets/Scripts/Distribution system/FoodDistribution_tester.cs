@@ -12,17 +12,43 @@ public class FoodDistribution_tester : FoodSourceManager
 {
     
  private float totalFood;
+ public GameObject[] populationsObjects;
+ private float totalDominance;
     //public void distributeFood()
     void Start()
     {
+        totalDominance = 0;
         totalFood = 0;
-        print("distribution system");
+        print("distribution system is updating");
         foreach(GameObject food in foodSources)
         {
+            totalFood = totalFood + getFoodSourceOutput(food);
             print("hi");
-            totalFood += getFoodSourceOutput(food);
         }
         print(totalFood);
+        List<Population> animals = getPopulationsCanAccess();
+        foreach(Population animal in animals)
+        {
+            totalDominance = totalDominance + getPopulationTotalDominance(animal);
+        }
+        distributeTotalFood(totalFood, totalDominance, animals);
+    }
+
+ private float getFoodSourceOutput(GameObject foodSource)
+    {
+        FoodSource source = foodSource.GetComponent<FoodSource>();
+        return source.totalOutput;
+    }
+
+
+        private void distributeTotalFood(float totalFood, float totalDominance, List<Population> populationsList)
+    {
+        foreach(Population population in populationsList)
+        {
+            float groupFood = totalFood * getPopulationTotalDominance(population) / totalDominance;
+            float individualFood = groupFood / getPopulationSize(population);
+            print(individualFood);
+        }
     }
 
 /*
@@ -35,6 +61,7 @@ public class FoodDistribution_tester : FoodSourceManager
     }
 */
 
+/*
     // Get the different food sources of that type in the region
     private List<FoodSource> getAllFoodOnMap()
     {
@@ -43,23 +70,25 @@ public class FoodDistribution_tester : FoodSourceManager
         return foodSources;
     }
 
-    private float getFoodSourceOutput(GameObject foodSource)
-    {
-        FoodSource source = foodSource.GetComponent<FoodSource>();
-        return source.totalOutput;
-    }
-    
+   */
 
-/*
+
         // Get a list of animal population that has access to given region
-    private List<AnimalPopulation> getPopulationsCanAccess(Region region)
+    private List<Population> getPopulationsCanAccess()
     {
-        List<AnimalPopulation> populationsCanAccess = new List<AnimalPopulation>();
+        this.populationsObjects = GameObject.FindGameObjectsWithTag("population");
+        List<Population> populationsCanAccess = new List<Population>();
+        foreach(GameObject populationObject in populationsObjects)
+        {
+            Population population = populationObject.GetComponent<Population>();
+            populationsCanAccess.Add(population);
+            print("a population was counted");
+        }
         // TODO: get list of animal population that has access to the region
         return populationsCanAccess;
     }
 
-
+/*
 // Get list of populations that can consume given food source in given list of population
     private List<AnimalPopulation> getPopulationsThatConsumeFoodSource(List<AnimalPopulation> allPopulations, NeedType foodSourceType)
     {
@@ -74,28 +103,25 @@ public class FoodDistribution_tester : FoodSourceManager
         }
         return canConsumePopulations;
     }
+*/
 
-    private float getPoplulationDomiance(AnimalPopulation population)
+    private float getPoplulationDominance(Population population)
     {
-        float domiance 0f;
-        // TODO: get dominace rating for given population
-        return domiance;
+      return population.PopulationDominace;
     }
 
-    private float getPopulationTotalDominace(AnimalPopulation population)
+    private float getPopulationTotalDominance(Population population)
     {
-        float totalDomiance = getPoplulationDomiance(population) * getPopulationSize(population);
-        return totalDomiance;
+        float totalDom = getPoplulationDominance(population) * getPopulationSize(population);
+        return totalDom;
     }
 
-    private float getPopulationSize(AnimalPopulation population)
+    private float getPopulationSize(Population population)
     {
-        float populationSize = 0f;
-        // TODO: get animal population size
-        return populationSize;
+        return population.PopulationSize;
     }
 
-    
+/*
     private void distributeTotalFood(FoodSourceType type, int totalFood, List<AnimalPopulation> populationsList)
     {
         float totalDomiance = 0f;
