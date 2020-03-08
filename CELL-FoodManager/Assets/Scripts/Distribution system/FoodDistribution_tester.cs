@@ -8,19 +8,18 @@ using UnityEngine;
 */
 
 
-public class FoodDistribution_tester : MonoBehaviour
+public class FoodDistribution_tester : FoodSourceManager
 {
-    private GameObject[] foodSources;
+    
  
     //public void distributeFood()
     void Start()
     {
-        this.foodSources = GameObject.FindGameObjectsWithTag("foodSource");
-        foreach (GameObject foodSource in this.foodSources)
+        print("distribution system");
+        foreach(GameObject food in foodSources)
         {
-            System.Console.WriteLine("This is working");
+            print("hi");
         }
-       //List<AnimalPopulation> listOfAnimals = getAllPopulations();
     }
 
 /*

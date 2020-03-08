@@ -24,6 +24,11 @@ public class RealisticFoodDistributionSystem
     private float getPopulationDominace(Population population) { return population.PopulationDominace; }
     private int getPopulationSize(Population population) { return population.PopulationSize; }
 
+    public void testFunction()
+    {
+        Console.WriteLine("I'm Distributing ahhhh");
+    }
+
     // Get a list of animal population that has access to given food source
     private List<Population> getPopulationsCanAccess(FoodSource foodSource)
     {
@@ -127,7 +132,7 @@ public class RealisticFoodDistributionSystem
         }
 
         //TODO : take this out when done testing
-        System.Console.WriteLine("I'm Distributing");
+        //print("I'm Distributing");
     }
     /*
     // This function will be envoked when a type of food source is marked "dirty"
