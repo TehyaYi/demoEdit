@@ -8,13 +8,20 @@ using UnityEngine;
 */
 
 
-public class FoodDistribution_tester : FoodSourceManager
+public class FoodDistribution_tester : MonoBehaviour
 {
     
  private float totalFood;
  public GameObject[] populationsObjects;
  private float totalDominance;
+ public GameObject[] foodSources;
+ public bool updateDistribution;
     
+    void Start()
+    {
+        this.foodSources = GameObject.FindGameObjectsWithTag("foodSource");
+        updateDistribution = true;
+    }
     
     void Update()
     {
@@ -58,8 +65,14 @@ public class FoodDistribution_tester : FoodSourceManager
         {
             float groupFood = totalFood * getPopulationTotalDominance(population) / totalDominance;
             float individualFood = groupFood / getPopulationSize(population);
+            //updateFoodNeed(individualFood, population)
             print(individualFood);
         }
+    }
+
+    public void updateFoodNeed(float individualFood, Population pop)
+    {
+        //TODO: This is the function that will integrate with the needs system
     }
 
 /*
