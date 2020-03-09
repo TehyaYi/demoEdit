@@ -14,8 +14,18 @@ public class FoodDistribution_tester : FoodSourceManager
  private float totalFood;
  public GameObject[] populationsObjects;
  private float totalDominance;
-    //public void distributeFood()
-    void Start()
+    
+    
+    void Update()
+    {
+        if(updateDistribution)
+        {
+            updateDistribution = false;
+            distribute();  
+        }
+    }
+
+    public void distribute()
     {
         totalDominance = 0;
         totalFood = 0;
@@ -23,25 +33,26 @@ public class FoodDistribution_tester : FoodSourceManager
         foreach(GameObject food in foodSources)
         {
             totalFood = totalFood + getFoodSourceOutput(food);
-            print("hi");
         }
         print(totalFood);
+
         List<Population> animals = getPopulationsCanAccess();
         foreach(Population animal in animals)
         {
             totalDominance = totalDominance + getPopulationTotalDominance(animal);
         }
+
         distributeTotalFood(totalFood, totalDominance, animals);
     }
 
- private float getFoodSourceOutput(GameObject foodSource)
+    private float getFoodSourceOutput(GameObject foodSource)
     {
         FoodSource source = foodSource.GetComponent<FoodSource>();
         return source.totalOutput;
     }
 
 
-        private void distributeTotalFood(float totalFood, float totalDominance, List<Population> populationsList)
+    private void distributeTotalFood(float totalFood, float totalDominance, List<Population> populationsList)
     {
         foreach(Population population in populationsList)
         {
@@ -84,7 +95,6 @@ public class FoodDistribution_tester : FoodSourceManager
             populationsCanAccess.Add(population);
             print("a population was counted");
         }
-        // TODO: get list of animal population that has access to the region
         return populationsCanAccess;
     }
 
